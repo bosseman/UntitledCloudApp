@@ -1,0 +1,48 @@
+.navbar-default {
+    background-color: rebeccapurple;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.btn-success {
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
+}
+
+#centeredButtons {
+    display: table;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 300px;
+}
+
+.matchingButtons {
+    width: 150px;
+}
+
+#errorMsg {
+    color: red;
+}
+
+.paddingMatching {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btnMenu {
+    margin-top: .25em;
+    display: block;
+    border: 1px solid rebeccapurple;
+    color: white;
+    background: rebeccapurple;
+    padding: .5em 1em;
+    width: 100%;
+    height: 75px;
+
+}

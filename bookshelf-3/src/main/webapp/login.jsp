@@ -16,6 +16,7 @@ Copyright 2016 Google Inc.
 <!-- [START list] -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css"/>
 <body>
 <div style="text-align: center">
  <h1>Enter your Mail</h1>
@@ -35,7 +36,7 @@ Copyright 2016 Google Inc.
   </form>
   <br>
   <form action = "/create">
-  	<button type = "submit" class = "btn">Register Account</button>
+  	<button type = "submit" class = "btn btn-success">Register Account</button>
   </form>
  </div>
 </div>

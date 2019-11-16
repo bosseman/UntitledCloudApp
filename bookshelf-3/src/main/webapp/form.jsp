@@ -17,6 +17,8 @@ limitations under the License.
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="styles.css"/>
 <div class="container">
     <h3>
         Register
@@ -60,14 +62,14 @@ limitations under the License.
       <input type="text" name="imageUrl" id="imageUrl" value="${imageUrl}" class="form-control" />
     </div>
 
-        <button type="submit" name="btnSubmitForm" class="btn" id="btnSubmitForm">Register</button>
+        <button type="submit" name="btnSubmitForm" class="btn btn-success" style="display:none" id="btnSubmitForm">Register</button>
 
     </form>
 </div>
 <script>
     var password = document.getElementById("uPassword")
         , confirm_password = document.getElementById("uPasswordRepeat"),
-            errorMsg = document.getElementById("errorMsg");aw
+            errorMsg = document.getElementById("errorMsg");
 
     function validatePassword(){
             if(password.value != confirm_password.value) {

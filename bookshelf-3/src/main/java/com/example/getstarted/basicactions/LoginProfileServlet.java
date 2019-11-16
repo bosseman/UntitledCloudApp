@@ -29,8 +29,8 @@ public class LoginProfileServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProfileDao dao = (ProfileDao) this.getServletContext().getAttribute("dao");
-		String uemail = (String) request.getParameter("uMail");
-		String upassword = (String) request.getParameter("uPassword");
+		String uemail = request.getParameter("uMail");
+		String upassword = request.getParameter("uPassword");
 		boolean loginSuccess = false;
 		try {
 			loginSuccess = dao.validateProfile(uemail, upassword);
@@ -39,7 +39,7 @@ public class LoginProfileServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(loginSuccess) {
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute("uemail", uemail);
 			session.setAttribute("upassword", upassword);
@@ -54,12 +54,12 @@ public class LoginProfileServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			response.sendRedirect("/mainActions");
-			
+
 		}
 		else {
 			response.sendRedirect("/login");
 		}
-		
+
 	}
 
 }

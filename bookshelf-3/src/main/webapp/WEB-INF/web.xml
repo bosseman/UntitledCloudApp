@@ -35,12 +35,12 @@
 <!-- [START bucket] -->
     <context-param>
         <param-name>bookshelf.bucket</param-name>
-        <param-value>untitledboardgame</param-value>
+        <param-value>frontenduntitledboardgame</param-value>
     </context-param>
 <!-- [END bucket] -->
     <context-param>
         <param-name>sql.urlRemote</param-name>
-        <param-value>jdbc:mysql://google/profiles?cloudSqlInstance=untitledboardgame:us-central1:cloudprofiles&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=myRootPassword1234</param-value>
+        <param-value>jdbc:mysql://google/profiles?cloudSqlInstance=frontenduntitledboardgame:us-central1:cloudprofiles&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=myRootPassword1234</param-value>
     </context-param>
     <context-param>
         <param-name>sql.urlLocal</param-name>

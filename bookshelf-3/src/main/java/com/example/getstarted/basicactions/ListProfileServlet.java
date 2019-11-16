@@ -97,7 +97,7 @@ public class ListProfileServlet extends HttpServlet {
     }
     
     //This is where i change stuff
-    req.getSession().getServletContext().setAttribute("books", profiles);
+    req.getSession().getServletContext().setAttribute("profiles", profiles);
     StringBuilder profileNames = new StringBuilder();
     for (Profile profile : profiles) {
       profileNames.append(profile.getCreatedBy() + " ");

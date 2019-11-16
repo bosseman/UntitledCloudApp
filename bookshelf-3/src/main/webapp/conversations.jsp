@@ -1,6 +1,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css"/>
 <div class="container">
   <h3>Matching</h3>
   <a href="/mainActions" class="btn btn-success btn-sm">
