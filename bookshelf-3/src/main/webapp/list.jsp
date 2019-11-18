@@ -35,17 +35,14 @@ limitations under the License.
         Main menu
     </a>
     <c:choose>
-        <%--        <c:when test="${empty profiles}">--%>
-        <c:when test="${false}">
+        <c:when test="${empty profiles}">
             <div class="text-center">
                 <img class="rounded paddingMatching"
                      src="${fn:escapeXml(not empty profile.imageUrl?book.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS12CPzYdB3k0r251NyJR9WLelCIxb11LhFfShMWwFPG5Kucgukgg&s')}">
                 <p align="center">No profiles found close to you!</p>
             </div>
-
         </c:when>
         <c:otherwise>
-<%--            <c:forEach items="${profiles}" var="profile">--%>
             <form action="/like" method="POST">
                 <div class="media">
                     <c:out value="${profiles[iteration]}" escapeXml="false"/>
@@ -79,5 +76,4 @@ limitations under the License.
         </c:otherwise>
     </c:choose>
 </div>
-
 <!-- [END list] -->

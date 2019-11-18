@@ -28,7 +28,7 @@ limitations under the License.
 <div class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <div class="navbar-brand" href="#">Untitled Board Game App</div>
+            <div class="navbar-brand" href="/mainActions">Untitled Board Game App</div>
         </div>
     </div>
 </div>

@@ -46,3 +46,17 @@
     height: 75px;
 
 }
+
+.conversationButton {
+    height: 100%;
+    position: absolute;
+    border: none;
+    background: lightgray;
+}
+
+.media-body {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: lightgray;
+}
