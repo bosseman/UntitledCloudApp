@@ -25,7 +25,7 @@
                              src="${fn:escapeXml(not empty profile.imageUrl?profile.imageUrl:'http://placekitten.com/g/128/192')}">
                     </div>
                     <div class="media-body">
-                        <h4 class="mt-0">${fn:escapeXml(profile.getCreatedBy())} TODO: NAME</h4>
+                        <h4 class="mt-0">${fn:escapeXml(profile.getCreatedBy())}</h4>
                         <button type="submit" class="conversationButton btn-block" name="openC" value="${profile.id}">
                                 Click here to open the conversation
                         </button>

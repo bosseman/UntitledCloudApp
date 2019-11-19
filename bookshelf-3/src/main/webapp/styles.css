@@ -60,3 +60,20 @@
     width: 100%;
     background: lightgray;
 }
+
+.conversationImage {
+    height: 50%;
+    width: 50%;
+}
+
+.conversationContainer {
+    display: block;
+    height: 70%;
+    overflow: auto;
+}
+
+.messageContainer {
+    height: 5%;
+    display: block;
+}
+
