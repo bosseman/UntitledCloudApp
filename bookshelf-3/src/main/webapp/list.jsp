@@ -38,7 +38,7 @@ limitations under the License.
         <c:when test="${empty profiles}">
             <div class="text-center">
                 <img class="rounded paddingMatching"
-                     src="${fn:escapeXml(not empty profile.imageUrl?book.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS12CPzYdB3k0r251NyJR9WLelCIxb11LhFfShMWwFPG5Kucgukgg&s')}">
+                     src="${fn:escapeXml(not empty profile.imageUrl?profile.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS12CPzYdB3k0r251NyJR9WLelCIxb11LhFfShMWwFPG5Kucgukgg&s')}">
                 <p align="center">No profiles found close to you!</p>
             </div>
         </c:when>
