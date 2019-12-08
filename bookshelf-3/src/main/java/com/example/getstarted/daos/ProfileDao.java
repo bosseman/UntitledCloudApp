@@ -15,6 +15,7 @@
 
 package com.example.getstarted.daos;
 
+import com.example.getstarted.objects.Convo;
 import com.example.getstarted.objects.Profile;
 import com.example.getstarted.objects.Result;
 
@@ -35,5 +36,9 @@ public interface ProfileDao {
   Result<Profile> listProfiles(String startCursor, boolean matching, long id) throws SQLException;
 
   boolean insertLike(Long decode, Long id)throws SQLException;
+
+Result<Convo> listConversation(Long myId, Long userId) throws SQLException;
+
+void insertMessage(long myId, long userId, String message)throws SQLException;
 }
 // [END example]
