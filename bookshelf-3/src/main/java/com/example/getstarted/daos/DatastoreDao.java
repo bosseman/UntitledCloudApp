@@ -15,6 +15,7 @@
 
 package com.example.getstarted.daos;
 
+import com.example.getstarted.objects.Convo;
 import com.example.getstarted.objects.Profile;
 import com.example.getstarted.objects.Result;
 
@@ -151,6 +152,18 @@ public Profile readProfiles(String bookId) throws SQLException {
 public boolean insertLike(Long decode, Long id) throws SQLException {
 	// TODO Auto-generated method stub
 	return false;
+}
+
+@Override
+public Result<Convo> listConversation(Long myId, Long userId) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public void insertMessage(long myId, long userId, String message) {
+	// TODO Auto-generated method stub
+	
 }
 }
 // [END example]
