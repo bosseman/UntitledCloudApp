@@ -15,6 +15,7 @@
 
 package com.example.getstarted.daos;
 
+import com.example.getstarted.objects.Convo;
 import com.example.getstarted.objects.Profile;
 import com.example.getstarted.objects.Result;
 
@@ -32,13 +33,13 @@ import org.apache.commons.dbcp2.BasicDataSource;
 public class CloudSqlDao implements ProfileDao {
   // [START constructor]
   private static final BasicDataSource dataSource = new BasicDataSource();
-
+ 
   /**
    * A data access object for Bookshelf using a Google Cloud SQL server for storage.
    */
   public CloudSqlDao(final String url) throws SQLException {
 
-    dataSource.setUrl(url);
+	  dataSource.setUrl(url);
     final String createTableSql = "CREATE TABLE IF NOT EXISTS profiles ( id INT NOT NULL "
         + "AUTO_INCREMENT, uemail VARCHAR(255), upassword VARCHAR(255), nickname VARCHAR(255), "
         + "description VARCHAR(255), imageUrl "
@@ -61,6 +62,13 @@ public class CloudSqlDao implements ProfileDao {
               conn.createStatement().executeUpdate(createMatches);
               System.out.println("True");
             }
+        final String createConvo = "CREATE TABLE IF NOT EXISTS convos ( id INT NOT NULL "
+                    + "AUTO_INCREMENT, from1 INT, to1 INT, message VARCHAR(255), createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
+                    + " PRIMARY KEY (id))";
+                try (Connection conn = dataSource.getConnection()) {
+                  conn.createStatement().executeUpdate(createConvo);
+                  System.out.println("True");
+                }  
   }
   // [END constructor]
 
@@ -83,8 +91,10 @@ public class CloudSqlDao implements ProfileDao {
       createBookStmt.executeUpdate();
       try (ResultSet keys = createBookStmt.getGeneratedKeys()) {
         keys.next();
-        System.out.println("true");
+       profile.setId(keys.getLong(1));
+        System.out.println(profile.getId());
         return keys.getLong(1);
+      
       }
     }
   }
@@ -169,60 +179,95 @@ public class CloudSqlDao implements ProfileDao {
       offset = Integer.parseInt(cursor);
     }
     if(!matching) {
-    listProfilesString = "SELECT SQL_CALC_FOUND_ROWS uemail, upassword, nickname, description, "
-        + " id,  imageUrl FROM profiles WHERE id != ? ORDER BY uemail ASC "
+    listProfilesString = "SELECT SQL_CALC_FOUND_ROWS p.uemail, p.upassword, p.nickname, p.description, "
+        + " p.id,  p.imageUrl FROM profiles p WHERE p.id != ? AND p.id NOT IN "
+        + "(SELECT l.id2 FROM likes1 l WHERE l.id1 = ? AND l.id2 = p.id )ORDER BY uemail ASC "
         + "LIMIT 1 OFFSET ?";
-    }else {
-    listProfilesString = "SELECT SQL_CALC_FOUND_ROWS p.uemail, p.nickname, p.description, p.id, p.imageUrl FROM"
-    			+ "profiles p, matches m WHERE m.id1 = ? AND p.id = m.id2 ORDER BY nickname ASC LIMIT 10 OFFSET ?";
-    }
     try (Connection conn = dataSource.getConnection();
-         PreparedStatement listBooksStmt = conn.prepareStatement(listProfilesString)) {
-      listBooksStmt.setLong(1, id);
-      listBooksStmt.setInt(2, offset);
-      List<Profile> resultBooks = new ArrayList<>();
-      try (ResultSet rs = listBooksStmt.executeQuery()) {
-        while (rs.next()) {
-          Profile profile = new Profile.Builder()
-              .password(rs.getString(Profile.PASSWORD))
-              .createdBy(rs.getString(Profile.NICKNAME))
+            PreparedStatement listBooksStmt = conn.prepareStatement(listProfilesString)) {
+         listBooksStmt.setLong(1, id);
+         listBooksStmt.setLong(2, id);
+         listBooksStmt.setInt(3, offset);
+         List<Profile> resultBooks = new ArrayList<>();
+         try (ResultSet rs = listBooksStmt.executeQuery()) {
+             while (rs.next()) {
+               Profile profile = new Profile.Builder()
+                   .password(rs.getString(Profile.PASSWORD))
+                   .createdBy(rs.getString(Profile.NICKNAME))
 
-              .description(rs.getString(Profile.DESCRIPTION))
-              .id(rs.getLong(Profile.ID))
+                   .description(rs.getString(Profile.DESCRIPTION))
+                   .id(rs.getLong(Profile.ID))
 
-              .title(rs.getString(Profile.UEMAIL))
-              .imageUrl(rs.getString(Profile.IMAGE_URL))
-              .build();
-          resultBooks.add(profile);
-         System.out.println(profile.getId());
-        }
-      }
-      try (ResultSet rs = conn.createStatement().executeQuery("SELECT FOUND_ROWS()")) {
-        int totalNumRows = 0;
-        if (rs.next()) {
-          totalNumRows = rs.getInt(1);
-        }
-        if (totalNumRows > offset + 1) {
-          return new Result<>(resultBooks, Integer.toString(offset + 1));
-        } else {
-          return new Result<>(resultBooks);
-        }
-      }
+                   .title(rs.getString(Profile.UEMAIL))
+                   .imageUrl(rs.getString(Profile.IMAGE_URL))
+                   .build();
+               resultBooks.add(profile);
+              //System.out.println(profile.getId());
+             }
+           }
+           try (ResultSet rs = conn.createStatement().executeQuery("SELECT FOUND_ROWS()")) {
+             int totalNumRows = 0;
+             if (rs.next()) {
+               totalNumRows = rs.getInt(1);
+             }
+             if (totalNumRows > offset + 1) {
+               return new Result<>(resultBooks, Integer.toString(offset + 1));
+             } else {
+               return new Result<>(resultBooks);
+             }
+           }
+    }}
+    else {
+    listProfilesString = "SELECT DISTINCT SQL_CALC_FOUND_ROWS p.uemail, p.nickname, p.description, p.id, p.imageUrl, p.upassword FROM"
+    			+ " profiles p, matches m WHERE m.id1 = ? AND p.id = m.id2 ORDER BY nickname ASC LIMIT 10 OFFSET ?";
+    try (Connection conn = dataSource.getConnection();
+            PreparedStatement listBooksStmt = conn.prepareStatement(listProfilesString)) {
+         listBooksStmt.setLong(1, id);
+         listBooksStmt.setInt(2, offset);
+         List<Profile> resultBooks = new ArrayList<>();
+         try (ResultSet rs = listBooksStmt.executeQuery()) {
+             while (rs.next()) {
+               Profile profile = new Profile.Builder()
+                   .password(rs.getString(Profile.PASSWORD))
+                   .createdBy(rs.getString(Profile.NICKNAME))
+
+                   .description(rs.getString(Profile.DESCRIPTION))
+                   .id(rs.getLong(Profile.ID))
+
+                   .title(rs.getString(Profile.UEMAIL))
+                   .imageUrl(rs.getString(Profile.IMAGE_URL))
+                   .build();
+               resultBooks.add(profile);
+              //System.out.println(profile.getId());
+             }
+           }
+           try (ResultSet rs = conn.createStatement().executeQuery("SELECT FOUND_ROWS()")) {
+             int totalNumRows = 0;
+             if (rs.next()) {
+               totalNumRows = rs.getInt(1);
+             }
+             if (totalNumRows > offset + 1) {
+               return new Result<>(resultBooks, Integer.toString(offset + 1));
+             } else {
+               return new Result<>(resultBooks);
+             }
+           }
+    }
     }
   }
 public void deleteLike(Long decode, Long id) throws SQLException{
-	final String deleteProfileString = "DELETE FROM likes1 WHERE from1 = ? AND to = ?";
+	final String deleteProfileString = "DELETE FROM likes1 WHERE id1 = ? AND id2 = ?";
     try (Connection conn = dataSource.getConnection();
             PreparedStatement deleteBookStmt = conn.prepareStatement(deleteProfileString)) {
-         deleteBookStmt.setLong(1, id);
-         deleteBookStmt.setLong(2, decode);
+         deleteBookStmt.setLong(2, id);
+         deleteBookStmt.setLong(1, decode);
          deleteBookStmt.executeUpdate();
        }
 }
   // [END listbooks]
 public void insertMatch(Long decode, Long id) throws SQLException{
 	//Delete from like then add to match
-	deleteLike(decode, id);
+	//deleteLike(decode, id);
 	String likesString = "INSERT INTO matches"
 			+"(id1, id2)"
 			+"VALUES (?,?)";
@@ -289,5 +334,58 @@ public boolean insertLike(Long decode, Long id) throws SQLException {
 	return matched;
 			
 	}
+
+@Override
+public Result<Convo> listConversation(Long myId, Long userId) throws SQLException{
+	int offset = 0;
+    final String listMessageString;
+
+    listMessageString = "SELECT * FROM convos WHERE (from1 = ? AND to1 = ?) OR (from1 = ? AND to1 = ?) ORDER BY createdAt ASC";
+
+
+   
+    try (Connection conn = dataSource.getConnection();
+         PreparedStatement listBooksStmt = conn.prepareStatement(listMessageString)) {
+      listBooksStmt.setLong(1, myId);
+      listBooksStmt.setLong(2, userId);
+      listBooksStmt.setLong(3, userId);
+      listBooksStmt.setLong(4, myId);
+      List<Convo> resultBooks = new ArrayList<>();
+      try (ResultSet rs = listBooksStmt.executeQuery()) {
+        while (rs.next()) {
+          Convo c = new Convo.Builder()
+             
+              .fromId(Long.decode(rs.getString(Convo.FROMID)))
+
+              .message(rs.getString(Convo.MESSAGE))
+              .time(rs.getString(Convo.TIME))
+
+
+              .build();
+          resultBooks.add(c);
+         System.out.println(c.getTime());
+        }
+      }
+      return new Result<>(resultBooks);
+    }
+}
+
+@Override
+public void insertMessage(long myId, long userId, String message) throws SQLException{
+	final String saveMessage = "INSERT INTO convos (from1, to1, message) VALUES (?,?,?)";
+	try(Connection conn = dataSource.getConnection();
+			final PreparedStatement messageInsert = conn.prepareStatement(saveMessage, Statement.RETURN_GENERATED_KEYS)){
+			messageInsert.setLong(1, myId);
+			messageInsert.setLong(2, userId);
+			messageInsert.setString(3, message);
+			messageInsert.executeUpdate();
+	 try( ResultSet key1 = messageInsert.getGeneratedKeys()){
+		key1.next();
+		System.out.println("True");
+	}
+	
+	}
+	
+}
 }		
-// [END example]
+
