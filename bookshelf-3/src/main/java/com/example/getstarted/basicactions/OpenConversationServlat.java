@@ -1,11 +1,20 @@
 package com.example.getstarted.basicactions;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.example.getstarted.daos.ProfileDao;
+import com.example.getstarted.objects.Convo;
+import com.example.getstarted.objects.Profile;
+import com.example.getstarted.objects.Result;
 
 /**
  * Servlet implementation class OpenConversationServlat
@@ -14,23 +23,38 @@ import javax.servlet.http.HttpServletResponse;
 public class OpenConversationServlat extends HttpServlet {
 
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String userName = req.getParameter("userName");
+		Long userId = Long.decode(req.getParameter("openC"));
+		//System.out.println(userId);
+		 HttpSession session = req.getSession();
+		    ProfileDao dao = (ProfileDao) this.getServletContext().getAttribute("dao");
+
+		    List<Convo> conversation = null;
+		    String endCursor = null;
+		    try {
+
+		      Result<Convo> result = dao.listConversation(Long.decode(session.getAttribute("id").toString()), userId);
+		      conversation = result.result;
+
+		    } catch (Exception e) {
+		      throw new ServletException("Error listing books", e);
+		    }
+		    
+
+		    req.getSession().getServletContext().setAttribute("conversation", conversation);
+		    StringBuilder profileNames = new StringBuilder();
+		    for (Convo profile : conversation) {
+		      profileNames.append(profile + " ");
+
+		    }
+
+		    req.setAttribute("page", "conversation");
+		    req.getRequestDispatcher("/base.jsp").forward(req, resp);
+		    
+		    
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//get button id(Profile needed) and session id 
-		//Call function to query in the conversation from coversation table? yes thats probably the best way to do it
-		//Where button.id = id1 and session id = id 2 OR button.id = id2 and session.id = id1 ...Order by timestamp? idk how to do that 
-		//Create ResultSet to hold each message
-		//pass ResultSet to JSP to do forEach
-		//forEach only displays: profile nickname: message
-		//-------If each message is retrieved at the same order they are sent then order by wont matter.
-		//load two btns
-		//One for submit message, message gets saved into db with the ids
-		//---------message must also be added to ResultSet to be displayed
-		//Thoughts written down, time to smoke
-		//The other just redirects back to /convserations
-	}
 
 }
