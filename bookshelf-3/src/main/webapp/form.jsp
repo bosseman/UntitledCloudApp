@@ -23,22 +23,24 @@ limitations under the License.
     <h3>
         Register
     </h3>
-
+    <body onload="validatePassword()">
     <form method="POST" action="${action}" enctype="multipart/form-data">
 
         <div class="form-group">
             <label for="uMail">Mail:</label>
-            <input type="email" name="uEmail" id="uEmail" value = "${email}" class="form-control" required>
+            <input type="email" name="uEmail" id="uEmail" value="${email}" class="form-control" required>
         </div>
 
         <div class="form-group">
             <label for="uPassword">Password</label>
-            <input type="password" name="uPassword" id="uPassword" value = "${password}" class="form-control" required>
+            <input type="password" name="uPassword" id="uPassword" value="${password}" class="form-control"
+                   required>
         </div>
 
         <div class="form-group">
             <label for="uPasswordRepeat">Repeat Password</label>
-            <input type="password" name="uPasswordRepeat" id="uPasswordRepeat" value = "${passwordRepeat}" class="form-control" required>
+            <input type="password" name="uPasswordRepeat" id="uPasswordRepeat" value="${passwordRepeat}"
+                   class="form-control" required>
         </div>
         <div id="errorMsg" style="display:none">
             Password doesn't match
@@ -46,38 +48,42 @@ limitations under the License.
 
         <div class="form-group">
             <label for="Nickname">Nickname</label>
-            <input type="text" name="Nickname" id="Nickname" value = "${nickname}" class="form-control" required>
+            <input type="text" name="Nickname" id="Nickname" value="${nickname}" class="form-control" required>
         </div>
-		<div class="form-group">
-      		<label for="description">Description</label>
-      		<textarea name="description" id="description" class="form-control">${description }</textarea>
-    	</div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" class="form-control">${description }</textarea>
+        </div>
         <div class="form-group">
             <label for="image">Profile Image</label>
-            <input type="file" name="file" id="file" class="form-control" />
+            <input type="file" name="file" id="file" class="form-control"/>
         </div>
-            <div class="form-group hidden">
-      <label for="imageUrl">Cover Image URL</label>
-      <input type="hidden" name="id" value="${id}" />
-      <input type="text" name="imageUrl" id="imageUrl" value="${imageUrl}" class="form-control" />
-    </div>
+        <div class="form-group hidden">
+            <label for="imageUrl">Cover Image URL</label>
+            <input type="hidden" name="id" value="${id}"/>
+            <input type="text" name="imageUrl" id="imageUrl" value="${imageUrl}" class="form-control"/>
+        </div>
 
-        <button type="submit" name="btnSubmitForm" class="btn btn-success" style="display:none" id="btnSubmitForm">Register</button>
+        <button type="submit" name="btnSubmitForm" class="btn btn-success" style="display:none" id="btnSubmitForm">
+            Register
+        </button>
 
     </form>
+    </body>
+
 </div>
 <script>
     var password = document.getElementById("uPassword")
         , confirm_password = document.getElementById("uPasswordRepeat"),
-            errorMsg = document.getElementById("errorMsg");
+        errorMsg = document.getElementById("errorMsg");
 
-    function validatePassword(){
-            if(password.value != confirm_password.value) {
-                document.getElementById("btnSubmitForm").style.display = "none";
-                errorMsg.style.display = "";
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            document.getElementById("btnSubmitForm").style.display = "none";
+            errorMsg.style.display = "";
         } else {
-                document.getElementById("btnSubmitForm").style.display = "";
-                errorMsg.style.display = "none";
+            document.getElementById("btnSubmitForm").style.display = "";
+            errorMsg.style.display = "none";
         }
     }
 
