@@ -15,7 +15,7 @@ import com.example.getstarted.daos.ProfileDao;
 /**
  * Servlet implementation class saveMessage
  */
-@WebServlet(name = "saveMessage" , urlPatterns = {"/saveMessage"})
+@WebServlet(name = "sendMessage" , urlPatterns = {"/sendMessage"})
 public class saveMessage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
