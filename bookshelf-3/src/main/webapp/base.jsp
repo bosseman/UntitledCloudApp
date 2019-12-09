@@ -30,6 +30,14 @@ limitations under the License.
         <div class="navbar-header">
             <div class="navbar-brand" href="#">Untitled Board Game App</div>
         </div>
+            <ul class="nav navbar-nav">
+                <c:if test="${sessionScope.nickname}">
+                    <li><a href="/matching?">Matching</a></li>
+                    <li><a href="/conversations?">Conversations</a></li>
+                    <li><a href="/update?">Update Profile</a></li>
+                </c:if>
+            </ul>
+
     </div>
 </div>
 <c:import url="/${page}.jsp"/>

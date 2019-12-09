@@ -6,18 +6,19 @@
 <link rel="stylesheet" type="text/css" href="styles.css"/>
 
 <br>
-<h3>${nickname}</h3>
+
 <div id="centeredButtons">
+    <h3>Welcome ${nickname} !</h3>
     <form action="/matching">
-        <button type="submit" class="btn">Match</button>
+        <%--<button type="submit" class="btn">Match</button>--%>
         <button type="submit" class="btn btn-success btnMenu">Match</button>
     </form>
     <form action="/conversations">
-        <button type="submit" class="btn">Conversations</button>
+        <%--<button type="submit" class="btn">Conversations</button>--%>
         <button type="submit" class="btn btn-success btnMenu">Conversations</button>
     </form>
     <form action="/update">
-        <button type="submit" class="btn">Update Profile</button>
+        <%--<button type="submit" class="btn">Update Profile</button>--%>
         <button type="submit" class="btn btn-success btnMenu">Update Profile</button>
     </form>
 </div>
