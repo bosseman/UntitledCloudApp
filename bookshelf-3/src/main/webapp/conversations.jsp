@@ -18,24 +18,25 @@
         </c:when>
         <c:otherwise>
             <c:forEach items="${books}" var="profile">
-                <form action="/openConvo" method=POST>
+                <form action="/OpenConvo" method=POST>
                     <div class="media">
                         <div class="media-left">
                             <img alt="ahhh"
                                  src="${fn:escapeXml(not empty profile.imageUrl?profile.imageUrl:'http://placekitten.com/g/128/192')}">
                         </div>
                         <div class="media-body">
-                            <h4 class="mt-0">${fn:escapeXml(profile.getCreatedBy())}</h4>
                             <button type="submit" class="conversationButton btn-block" name="openC"
                                     value="${profile.id}">
-                                Click here to open the conversation
+                                Click here to open the conversation with ${fn:escapeXml(profile.getCreatedBy())}
                             </button>
                         </div>
                         <hr>
                     </div>
                 </form>
             </c:forEach>
-            <c:if test="${not empty cursor}">
+        </c:otherwise>
+    </c:choose>
+<%--            <c:if test="${not empty cursor}">
                 <nav>
                     <ul class="pager">
                         <li><a href="?cursor=${fn:escapeXml(cursor)}">Load Next</a></li>
@@ -46,8 +47,7 @@
                 <nav>
                     <p>No more profiles</p>
                 </nav>
-            </c:if>
-        </c:otherwise>
-    </c:choose>
+            </c:if>--%>
+
 </div>
 <!-- [END list] -->

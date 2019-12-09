@@ -20,8 +20,8 @@ limitations under the License.
 <link rel="stylesheet" type="text/css" href="styles.css"/>
 <div class="container">
     <h3>Matching</h3>
-    <a href="/mainActions" class="btn btn-success btn-sm">
-        <i class="glyphicon glyphicon-plus"></i>
+    <a href="/mainActions" class="btn btn-success btnMenu">
+        <i class="glyphicon glyphicon-link"></i>
         Main menu
     </a>
     <c:choose>
@@ -33,32 +33,27 @@ limitations under the License.
                 <form action = "/like" method = "POST">
                 <div class="media">
                     <div class="media-left">
-                        <img alt="ahhh"
-                             src="${fn:escapeXml(not empty profile.imageUrl?profile.imageUrl:'http://placekitten.com/g/128/192')}">
+                        <img
+                                src="${fn:escapeXml(not empty profile.imageUrl?profile.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS12CPzYdB3k0r251NyJR9WLelCIxb11LhFfShMWwFPG5Kucgukgg&s')}">
                     </div>
-                    <div class="media-body">
-                        <h4>${fn:escapeXml(profile.getCreatedBy())}</h4>
-                        <p>${fn:escapeXml(profile.getDescription())}</p>
-                    </div>
+
+                    <h4>${fn:escapeXml(profile.getCreatedBy())}</h4>
+                    <p>${fn:escapeXml(profile.getDescription())}</p>
+
                 </div>
             </c:forEach>
             <input type="hidden" name="id" value="${id}"/>
             <input type="hidden" name="cursor" value="${cursor}"/>
             <br>
-            <button type="submit">Like</button>
+            <button type="submit" class="btn btn-success matchingButtons">Like</button>
             </form>
-            <p>${macthed}</p>
+            <p>${matched}</p>
             <c:if test="${not empty cursor}">
-                <nav>
-                    <ul class="pager">
-                        <li><a href="?cursor=${fn:escapeXml(cursor)}">Next Profile</a></li>
-                    </ul>
-                </nav>
+                <a class="btn btn-success matchingButtons" href="?cursor=${fn:escapeXml(cursor)}"> Next Profile </a>
             </c:if>
             <c:if test="${empty cursor}">
                 <nav>
-                    <p>No more profiles</p>
-                </nav>
+                    <p>No more profiles available</p>
             </c:if>
         </c:otherwise>
     </c:choose>
