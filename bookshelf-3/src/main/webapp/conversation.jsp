@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<div class="container">
+<div class="container" id="centeredActions">
     <h3 align="center">Conversations</h3>
     <a href="/mainActions" class="btn btn-success btnMenu">
         <i class="glyphicon glyphicon-link"></i>
