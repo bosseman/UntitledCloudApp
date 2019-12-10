@@ -64,10 +64,7 @@ public class ConversationServlet extends HttpServlet {
 	  }   
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Need to set up a menu with all profiles matched with
-		//First. We need to call a function to retrieve all matches profiles
-		//Second. We need to load each profile similar to "List" into a cursor that displays... 10? at a time
-		//Then create a button with the id of each unique profile, and user profile pic and name need to be loaded
+
 		 HttpSession session = request.getSession();
 	    ProfileDao dao = (ProfileDao) this.getServletContext().getAttribute("dao");
 	    String startCursor = request.getParameter("cursor");
@@ -85,7 +82,7 @@ public class ConversationServlet extends HttpServlet {
 	    StringBuilder profileNames = new StringBuilder();
 	    for (Profile profile : profiles) {
 	      profileNames.append(profile.getCreatedBy() + " ");
-	      request.setAttribute("id" , profile.getId().toString());
+
 	    }
 	    request.setAttribute("cursor", endCursor);
 	    request.setAttribute("page", "conversations");
@@ -93,19 +90,7 @@ public class ConversationServlet extends HttpServlet {
 	    
 	    
 	  }
-	}    
-	}
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Once user has selected a profile to open. We need to redirect to a different servlet by saving a variable session
-		// call it "likedId" and then redirect to "openConversationServlet" "/openConvo"
-		//New servlet will need to grab "likedId", process that and session.id to query database to retrieve
-		//All messages. All messages will need to be displayed similar to profiles
-		//Perhaps we timestamp messages and grab all where from id1 = session.id and id2 = "likedID" and vice versa
-		//Then arrange in dec order? doesnt really matter here.
-		//Perhaps also grab id so we can arrange messages from one person on one side then the other person on the other side
-		//Kind of like texting? IDK, imma go smoke now that my thoughts have been written down
-	}
 
 }
