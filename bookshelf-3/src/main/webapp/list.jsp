@@ -33,7 +33,7 @@ limitations under the License.
                 <form action = "/like" method = "POST">
                 <div class="media">
                     <div class="media-left">
-                        <img
+                        <img class="paddingMatching" style="max-width: 50%"
                                 src="${fn:escapeXml(not empty profile.imageUrl?profile.imageUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS12CPzYdB3k0r251NyJR9WLelCIxb11LhFfShMWwFPG5Kucgukgg&s')}">
                     </div>
 

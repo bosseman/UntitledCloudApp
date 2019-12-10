@@ -21,4 +21,8 @@
         <%--<button type="submit" class="btn">Update Profile</button>--%>
         <button type="submit" class="btn btn-success btnMenu">Update Profile</button>
     </form>
+    <form action="/logout" method=POST>
+        <%--<button type="submit" class="btn">Update Profile</button>--%>
+        <button type="submit" class="btn btn-success btnMenu">Logout</button>
+    </form>
 </div>

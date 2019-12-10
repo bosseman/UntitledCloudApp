@@ -18,7 +18,7 @@
         </c:when>
         <c:otherwise>
             <c:forEach items="${books}" var="profile">
-                <form action="/OpenConvo" method=POST>
+                <form action="/OpenConvo">
                     <div class="media">
                         <div class="media-left">
                             <img alt="ahhh"

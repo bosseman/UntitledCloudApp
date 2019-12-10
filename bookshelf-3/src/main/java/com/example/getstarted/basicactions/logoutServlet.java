@@ -49,8 +49,9 @@ public class logoutServlet extends HttpServlet {
             session.invalidate();
 
         }
+        request.setAttribute("page", "login");
+        request.getRequestDispatcher("/base.jsp").forward(request, response);
 
-        response.sendRedirect(request.getContextPath() + "/loginPage.html");
 
     }
 
