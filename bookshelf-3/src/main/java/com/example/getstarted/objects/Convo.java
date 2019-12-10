@@ -5,13 +5,13 @@ public class Convo {
 	private String message;
 	private String time;
 	
-	public static final String FROMID = "fromId";
+	public static final String FROMID = "from1";
 	public static final String MESSAGE = "message";
-	public static final String TIME = "time";
+	public static final String TIME = "createdAt";
 	private Convo(Builder builder) {
-		this.fromId = fromId;
-		this.message = message;
-		this.time = time;
+		this.fromId = builder.fromId;
+		this.message = builder.message;
+		this.time = builder.time;
 	}
 	public static class Builder{
 		private long fromId;
