@@ -9,7 +9,7 @@
         <i class="glyphicon glyphicon-link"></i>
         Main menu
     </a>
-    <input type = "hidden" name = "id">
+    
     <c:choose>
         <c:when test="${empty conversation}">
             <div class="text-center">
