@@ -40,7 +40,8 @@ public class saveMessage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		long userId = Long.decode(req.getParameter("id"));
+		//Minor change. Grab ID from session instead
+		long userId = Long.decode(session.getAttribute("openProfileId").toString());
 		long myId = Long.decode(session.getAttribute("id").toString());
 		String message = req.getParameter("inputMessage");
 	    ProfileDao dao = (ProfileDao) this.getServletContext().getAttribute("dao");
