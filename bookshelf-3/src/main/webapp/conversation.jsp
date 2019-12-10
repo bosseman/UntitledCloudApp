@@ -29,7 +29,7 @@
                                 </div>--%>
                             <div class="media-body">
                                 <h4 class="mt-0">${message.fromId} ${message.time}</h4>
-                                <p>${message.text}</p>
+                                <p>${message.message}</p>
                             </div>
                             <hr>
                         </div>
