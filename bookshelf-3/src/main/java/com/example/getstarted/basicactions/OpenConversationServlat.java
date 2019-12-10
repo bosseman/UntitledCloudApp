@@ -24,15 +24,18 @@ public class OpenConversationServlat extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		String userName = req.getParameter("userName");
-		Long userId = Long.decode(req.getParameter("openC"));
+		long userId;
 		//System.out.println(userId);
 		 HttpSession session = req.getSession();
+		 try {
+				userId = Long.decode(session.getAttribute("openProfileId").toString());
+		 	}catch(NullPointerException e ){
+				userId = Long.decode(req.getParameter("openC"));
+		 	}
+		 System.out.print(userId);
 		    ProfileDao dao = (ProfileDao) this.getServletContext().getAttribute("dao");
 
 		    List<Convo> conversation = null;
-		    String endCursor = null;
 		    try {
 
 		      Result<Convo> result = dao.listConversation(Long.decode(session.getAttribute("id").toString()), userId);
@@ -49,7 +52,6 @@ public class OpenConversationServlat extends HttpServlet {
 		      profileNames.append(profile + " ");
 
 		    }
-			//Minor change. Save the id we wish to open into a session variable. This will be used for getting convo. 
 		    session.setAttribute("openProfileId", userId);
 		    req.setAttribute("page", "conversation");
 		    req.getRequestDispatcher("/base.jsp").forward(req, resp);
