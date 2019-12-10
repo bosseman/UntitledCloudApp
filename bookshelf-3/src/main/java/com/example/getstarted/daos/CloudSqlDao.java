@@ -354,16 +354,14 @@ public Result<Convo> listConversation(Long myId, Long userId) throws SQLExceptio
       try (ResultSet rs = listBooksStmt.executeQuery()) {
         while (rs.next()) {
           Convo c = new Convo.Builder()
-             
               .fromId(Long.decode(rs.getString(Convo.FROMID)))
-
               .message(rs.getString(Convo.MESSAGE))
               .time(rs.getString(Convo.TIME))
-
-
               .build();
           resultBooks.add(c);
-         System.out.println(c.getTime());
+          System.out.println(rs.getString(Convo.FROMID));
+         System.out.println(rs.getString(Convo.MESSAGE));
+         System.out.println(rs.getString(Convo.TIME));
         }
       }
       return new Result<>(resultBooks);
