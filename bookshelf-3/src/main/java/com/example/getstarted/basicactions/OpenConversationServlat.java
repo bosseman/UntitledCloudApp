@@ -49,7 +49,8 @@ public class OpenConversationServlat extends HttpServlet {
 		      profileNames.append(profile + " ");
 
 		    }
-
+			//Minor change. Save the id we wish to open into a session variable. This will be used for getting convo. 
+		    session.setAttribute("openProfileId", userId);
 		    req.setAttribute("page", "conversation");
 		    req.getRequestDispatcher("/base.jsp").forward(req, resp);
 		    
