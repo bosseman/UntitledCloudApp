@@ -56,7 +56,7 @@ Copyright 2016 Google Inc.
 
     <!-- [START config] -->
 
-    <projectID>untitledboardgame-261600</projectID> <!-- set w/ -DprojectID=myProjectID on command line -->
+    <projectID>untitledboardapp</projectID> <!-- set w/ -DprojectID=myProjectID on command line -->
 
 
 
@@ -70,7 +70,7 @@ Copyright 2016 Google Inc.
 
 <!-- -Dsql.instanceName=localhost to use a local MySQL server -->
 
-    <sql.instanceName>untitledboardgame-261600:us-central1:untitledboardgame </sql.instanceName>
+    <sql.instanceName>untitledboardapp:us-central1:untitledboardgame</sql.instanceName>
 
     <sql.userName>root</sql.userName>                         <!-- A reasonable default -->
 
@@ -78,7 +78,7 @@ Copyright 2016 Google Inc.
 
 
 
-    <bookshelf.bucket>untitledboardgame-261600</bookshelf.bucket> <!-- bucket w/o gs:// -->
+    <bookshelf.bucket>untitledboardapp</bookshelf.bucket> <!-- bucket w/o gs:// -->
 
     <!-- [END config] -->
 
