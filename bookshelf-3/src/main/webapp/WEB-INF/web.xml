@@ -21,7 +21,7 @@
 
         <param-name>bookshelf.bucket</param-name>
 
-        <param-value>untitledboardgame-261600</param-value>
+        <param-value>untitledboardapp</param-value>
 
     </context-param>
 
@@ -29,7 +29,7 @@
 
         <param-name>sql.urlRemote</param-name>
 
-        <param-value>jdbc:mysql://google/profiles?cloudSqlInstance=untitledboardgame-261600:us-central1:untitledboardgame&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=myRootPassword1234</param-value>
+        <param-value>jdbc:mysql://google/profiles?cloudSqlInstance=untitledboardapp:us-central1:untitledboardgame &amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=myRootPassword1234</param-value>
 
     </context-param>
 
